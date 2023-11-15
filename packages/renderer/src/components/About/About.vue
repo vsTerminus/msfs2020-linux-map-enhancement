@@ -25,8 +25,6 @@
           <button class="btn w-32 h-32 btn-info btn-square" @click="donate">
             <a href="https://www.paypal.com/paypalme/siconghe?country.x=C2&locale.x=en_US" target="_blank">
               PAYPAL</a></button>
-          <img src="../../../public/images/alipay.jpg" class="w-32 h-32" alt="alipay" />
-          <img src="../../../public/images/wechat.jpg" class="w-32 h-32" alt="wechat" />
         </div>
         <div class="divider"></div>
         <div class="indicator" v-if="this.statusStore.updateInfo">
