@@ -9,6 +9,10 @@ tmp
 **/.tmp
 release
 
+# Updated default cache and hosts locations
+extra/server/cache/
+extra/server/__pycache__/
+hosts
 
 # local env files
 .env.local

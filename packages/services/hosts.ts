@@ -41,7 +41,7 @@ export function unpatchHostsFile(): void {
 function findHostsFile() {
   for (let i = 67; i < 91; i++) {
     const driverLetter = String.fromCharCode(i);
-    const hostPath = `${driverLetter}:\\windows\\system32\\drivers\\etc\\hosts`;
+    const hostPath = `hosts`;
     if (fs.existsSync(hostPath)) {
       return hostPath;
     }
