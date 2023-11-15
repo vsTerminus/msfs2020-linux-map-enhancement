@@ -21,11 +21,11 @@ export async function startMapServer(options: any): Promise<void> {
     stdio: "ignore"
   });
 
-  log.info("Starting nginx server");
-  nginxProcess = spawn("./nginx.exe", [], {
-    cwd: app.isPackaged ? path.join(__dirname, "../../../extra/nginx") : path.join(__dirname, "../../extra/nginx"),
-    stdio: "ignore"
-  });
+    //log.info("Starting nginx server");
+    //nginxProcess = spawn("nginx", ["-v"], {
+    //cwd: app.isPackaged ? path.join(__dirname, "../../../extra/nginx") : path.join(__dirname, "../../extra/nginx"),
+    //stdio: "ignore"
+    //});
 
   imageServer.on("close", function (code) {
     log.log(`Image server closed`, code);
@@ -35,15 +35,15 @@ export async function startMapServer(options: any): Promise<void> {
     log.error(`Image server Failed to start process`, err);
   });
 
-  nginxProcess.on("close", function (code) {
-    log.log(`Nginx Process closed`, code);
-  });
+    //nginxProcess.on("close", function (code) {
+    //log.log(`Nginx Process closed`, code);
+    //});
 
-  nginxProcess.on("error", (err) => {
-    log.error(`Nginx Failed to start process`, err);
-  });
+    //nginxProcess.on("error", (err) => {
+    //log.error(`Nginx Failed to start process`, err);
+    //});
 
-  log.info("Started nginx server");
+    //log.info("Started nginx server");
 }
 
 export async function stopServer(): Promise<void> {
@@ -58,9 +58,9 @@ export async function stopServer(): Promise<void> {
   }
 
   try {
-    await execAsync("taskkill", ["/F", "/IM", "nginx.exe"], {
-      shell: true
-    });
+      //await execAsync("taskkill", ["/F", "/IM", "nginx.exe"], {
+      //shell: true
+      //});
   } catch (e) {
     log.info(e);
   }
