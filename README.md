@@ -27,6 +27,15 @@ I chose to install this with pip and override the warning:
 
     pip install --user --break-system-packages pyGeoTile
 
+## mkcert
+
+This is required for nginx, it creates a local self-signed certificate for your webserver to use.
+
+You should be able to find this in your distro's package manager, eg
+
+    sudo pacman -Sy mkcert
+
+
 ## NGINX
 
 So far I haven't found a good way to launch nginx from the application (with sudo), so for now my solution is to launch it separately.
