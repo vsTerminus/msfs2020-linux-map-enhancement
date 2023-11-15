@@ -28,12 +28,12 @@ import { v4 as uuidv4 } from "uuid";
 crashReporter.start({
   productName: "msfs2020-map-enhancement",
   companyName: "msfs2020-map-enhancement",
-  submitURL: "https://submit.backtrace.io/msfs2020-map-enhancement/fc1803fa0c138e6c031608032a5dfc130609f0a868796d52320cb9d89258abdd/minidump",
-  uploadToServer: true
+  submitURL: "",
+  uploadToServer: false
 });
 
 log.transports.remote.level = "info";
-log.transports.remote.url = "http://tx.k8s.april1985.com/msfs2020/log";
+log.transports.remote.url = "";
 
 app.commandLine.appendSwitch("--no-sandbox");
 
@@ -66,9 +66,7 @@ async function createWindow() {
   log.info("Application started");
   log.info("Version: " + app.getVersion());
   // @ts-ignore
-  if (!config.remoteLogEnabled) {
-    log.transports.remote.level = false;
-  }
+  log.transports.remote.level = false;
 
   win = new BrowserWindow({
     title: "Main window",
@@ -206,10 +204,9 @@ ipcMain.handle(EVENT_CHECK_PORT, async () => {
 });
 
 ipcMain.handle(EVENT_CHECK_UPDATE, async () => {
-  autoUpdater.autoDownload = true;
+  autoUpdater.autoDownload = false;
   autoUpdater.autoInstallOnAppQuit = false;
-  let updateCheckResult = await autoUpdater.checkForUpdates();
-  return updateCheckResult.updateInfo;
+  return "Update Check Disabled";
 });
 
 autoUpdater.on("update-downloaded", (event, releaseNotes, releaseName) => {
