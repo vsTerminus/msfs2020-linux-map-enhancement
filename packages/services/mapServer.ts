@@ -16,7 +16,7 @@ export async function startMapServer(options: any): Promise<void> {
 
   let pythonProgramDir = app.isPackaged ? path.join(__dirname, "../../../extra/server/") : path.join(__dirname, "../../extra/server/");
 
-  imageServer = spawn("./python/pymsfs2020.exe", args, {
+    imageServer = spawn("/usr/bin/python", args, {
     cwd: pythonProgramDir,
     stdio: "ignore"
   });
@@ -50,9 +50,9 @@ export async function stopServer(): Promise<void> {
   log.info("Force killing server");
 
   try {
-    await execAsync("taskkill", ["/F", "/IM", "pymsfs2020.exe"], {
+      await execAsync("pkill", ["-f", "'python server.py'"], {
       shell: true
-    });
+      });
   } catch (e) {
     log.info(e);
   }
