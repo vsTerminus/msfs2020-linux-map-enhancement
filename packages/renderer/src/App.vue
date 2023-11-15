@@ -65,7 +65,6 @@ export default {
     async check443Port() {
       const result = await window.ipcRenderer.invoke(EVENT_CHECK_PORT);
       if (result) {
-        window.open(FAQ_PAGE_URL, "_blank");
         this.$eventBus.emit("show-alert", "443 Port is using, the mod won't work. Please read FAQ to solve the problem and close any application using 443 port");
       }
     },

@@ -92,7 +92,6 @@ export default {
       log.info("Start mod result", result);
 
       if (!result.success) {
-        window.open(FAQ_PAGE_URL, "_blank");
         this.$eventBus.emit("show-alert", result.error.message);
         return;
       }
