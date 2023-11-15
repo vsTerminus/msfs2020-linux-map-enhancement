@@ -14,18 +14,18 @@ Please note: This version does not have any of the new features developed by the
 
 In the root directory:
 
-    npm install
+        npm install
 
 ## Python
 
 In `extra/server/`:
 
-    pip -r requirements.txt
+        pip -r requirements.txt
 
 Or if you are on Arch Linux it will complain that you should use pacman instead. You can find everything in the official or AUR repos except for `pyGeoTile`.
 I chose to install this with pip and override the warning:
 
-    pip install --user --break-system-packages pyGeoTile
+        pip install --user --break-system-packages pyGeoTile
 
 ## mkcert
 
@@ -33,7 +33,7 @@ This is required for nginx, it creates a local self-signed certificate for your 
 
 You should be able to find this in your distro's package manager, eg
 
-    sudo pacman -Sy mkcert
+        sudo pacman -Sy mkcert
 
 
 ## NGINX
@@ -44,13 +44,13 @@ You have two options:
 
 1. You can run the packaged `nginx.exe` with `wine`
 
-    cd extra/nginx
-    sudo wine nginx.exe
+        cd extra/nginx
+        sudo wine nginx.exe
 
 2. You can install nginx with your system package manager and then just manually start it and point it at the packaged config file
 
-    sudo pacman -Sy nginx
-    sudo nginx -c $PWD/extra/nginx/conf/nginx.conf
+        sudo pacman -Sy nginx
+        sudo nginx -c $PWD/extra/nginx/conf/nginx.conf
 
 Both options seemed to work for me. I prefer the second one.
 Note: If you see errors about missing directories you may have to create them.
@@ -61,12 +61,12 @@ I'm not running this app with `sudo` but modifying the `/etc/hosts` file would r
 
 1. In the project root directory (or in the `linux-unpacked` directory if you choose to build the project) create an empty file named `hosts`
 
-    touch hosts
+        touch hosts
 
 2. Edit your actual `/etc/hosts` file and add the following lines:
  
-    127.0.0.1 kh.ssl.ak.tiles.virtualearth.net
-    127.0.0.1 khstorelive.azureedge.net
+        127.0.0.1 kh.ssl.ak.tiles.virtualearth.net
+        127.0.0.1 khstorelive.azureedge.net
 
 Obviously the downside here is that you'll have to manually remove/comment these out when you're not playing.
 
@@ -74,11 +74,11 @@ Obviously the downside here is that you'll have to manually remove/comment these
 
 The simplest way to get the application running is
 
-    npm run dev
+        npm run dev
 
 You can also build the source into a packaged executable:
 
-    npm run build
+        npm run build
 
 Then you will find two versions:
 
