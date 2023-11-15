@@ -10,7 +10,7 @@ const execAsync = util.promisify(execFile);
 export const addCertificate = async (): Promise<void> => {
   log.info("Adding certificate");
   const { stdout } = await execAsync(
-    "mkcert.exe",
+    "mkcert",
     [
       "-install",
       "-key-file",
