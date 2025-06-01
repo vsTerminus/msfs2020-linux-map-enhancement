@@ -18,27 +18,25 @@ In the root directory:
 
 ## Python
 
-In `extra/server/`:
+Take a look in `extra/server/requirements.txt`. You will need to install all of the packages listed there.
 
-        pip -r requirements.txt
+You can do this one of two ways:
 
-Or if you are on Arch Linux it will complain that you should use pacman instead. You can find everything in the official or AUR repos except for `pyGeoTile`.
-I chose to install this with pip and override the warning:
+1. If you can find them, install each package via your distro's package manager.
+2. If you can't, activate a python venv and run `pip -r requirements.txt` from the `extra/server/` directory.
+
+In my experience you shouldn't have any trouble finding the packages, except for `pyGeoTile`.
+
+If you can't find it and don't want to use a venv you can override your package manager and install this via pip with:
 
         pip install --user --break-system-packages pyGeoTile
-
-## mkcert
-
-This is required for nginx, it creates a local self-signed certificate for your webserver to use.
-
-You should be able to find this in your distro's package manager, eg
-
-        sudo pacman -Sy mkcert
 
 
 ## NGINX
 
-So far I haven't found a good way to launch nginx from the application (with sudo), so for now my solution is to launch it separately.
+On Windows this app launches its own instance of nginx which binds to 443 and listens for requests for map tiles from the game.
+
+On Linux that's both technically challenging to do (443 is a protected port and requires root to bind) and also not really the way things are done.
 
 You have two options:
 
@@ -47,10 +45,7 @@ You have two options:
         cd extra/nginx
         sudo wine nginx.exe
 
-2. You can install nginx with your system package manager and then just manually start it and point it at the packaged config file
-
-        sudo pacman -Sy nginx
-        sudo nginx -c $PWD/extra/nginx/conf/nginx.conf
+2. You can install nginx via your package manager and use the included config file (Found in `extra/nginx/conf/nginx.conf`)
 
 Both options seemed to work for me. I prefer the second one.
 Note: If you see errors about missing directories you may have to create them.
@@ -88,17 +83,3 @@ Then you will find two versions:
 I've had better luck getting it to run correctly from the `linux-unpacked` folder. (The AppImage binary seems to fail on mkcert)
 
 Once the app launches click "Start Flying" and you should see "Image Server" and "Nginx Server" status both change to "good" at the bottom. You're all set.
-
-# Troubleshooting
-
-## Nginx Server failed
-
-Right now the app won't even try to launch nginx, so you'll have to launch it yourself. See the NGINX section above.
-
-## Warnings
-
-If you are already running NGINX you should see a warning when you launch the app:
-
-    Port 443 in use - Application will not work (Unless you are running your own NGINX)
-
-If you are *not* running your own NGINX and you see this warning it means you have something else binding that port and will need to figure out what it is.
