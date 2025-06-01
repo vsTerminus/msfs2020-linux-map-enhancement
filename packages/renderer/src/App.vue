@@ -62,12 +62,6 @@ export default {
     selectMenu(selectedMenu) {
       this.activeMenu = selectedMenu;
     },
-    async check443Port() {
-      const result = await window.ipcRenderer.invoke(EVENT_CHECK_PORT);
-      if (result) {
-        this.$eventBus.emit("show-alert", "Port 443 in use - Application will not work (Unless you are running your own NGINX)");
-      }
-    },
     async getVersionUpdate() {
       this.statusStore.updateInfo = undefined;
       const result = await window.ipcRenderer.invoke(EVENT_CHECK_UPDATE);
@@ -89,7 +83,6 @@ export default {
     });
 
     setTimeout(async () => {
-      await this.check443Port();
       await this.getVersionUpdate();
     }, 0);
   }
