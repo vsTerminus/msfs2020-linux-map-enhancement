@@ -3,11 +3,7 @@
   <div class="card full bg-base-100 shadow-xl ">
     <div class="card-body">
       <h2 class="card-title">Privacy</h2>
-      <p>To help me get enough data to improve this application, please let it enabled. If you have any concern, you can turn it off.</p>
-      <label class="label cursor-pointer">
-        <span class="label-text">Allow collecting anonymous logs to remote server?</span>
-        <input type="checkbox" v-model="optionStore.remoteLogEnabled" class="checkbox">
-      </label>
+      <p>The Windows version would upload logs to a remote server by default. That functionality has been deleted in this fork.</p>
     </div>
   </div>
 
