@@ -8,7 +8,6 @@
           <Start v-show="activeMenu === MenuItems.HOME" />
           <Options class="h-[42rem]" v-show="activeMenu === MenuItems.OPTION" />
           <About class="h-[42rem]" v-show="activeMenu === MenuItems.ABOUT" :update-info="updateInfo" />
-          <ReportIssue v-show="activeMenu === MenuItems.REPORT_ISSUE" />
         </div>
       </div>
     </div>
@@ -29,7 +28,6 @@ import Start from "./components/Start/Start.vue";
 import Options from "./components/Options/Options.vue";
 import About from "./components/About/About.vue";
 import ServerStatus from "./components/common/ServerStatus.vue";
-import ReportIssue from "./components/ReportIssue/ReportIssue.vue";
 import { FAQ_PAGE_URL, MenuItems } from "./const";
 import Alert from "./components/common/Alert.vue";
 import { useOptionStore } from "./stores/optionStore";
@@ -38,11 +36,8 @@ import { useStatusStore } from "./stores/statusStore";
 import { EVENT_CHECK_PORT, EVENT_CHECK_UPDATE } from "../../consts/custom-events";
 import log from "electron-log";
 
-log.transports.remote.level = 'info';
-log.transports.remote.url = 'http://tx.k8s.april1985.com/msfs2020/log'
-
 export default {
-  components: { Alert, Start, Navbar, Menu, Options, About, ServerStatus, ReportIssue },
+  components: { Alert, Start, Navbar, Menu, Options, About, ServerStatus },
   setup() {
     const optionStore = useOptionStore();
 
