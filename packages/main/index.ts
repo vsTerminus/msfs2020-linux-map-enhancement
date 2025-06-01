@@ -15,7 +15,6 @@ import { addCertificate } from "../services/certificate";
 import { patchHostsFile, unpatchHostsFile } from "../services/hosts";
 import { startMapServer, stopServer } from "../services/mapServer";
 import { startGame } from "../services/game";
-import { autoUpdater } from "electron-updater";
 
 import { initialize } from "@electron/remote/main";
 import { enable } from "@electron/remote/dist/src/main/server";
@@ -32,15 +31,9 @@ crashReporter.start({
   uploadToServer: false
 });
 
-log.transports.remote.level = "info";
-log.transports.remote.url = "";
-
 app.commandLine.appendSwitch("--no-sandbox");
 
 initialize();
-
-// Set application name for Windows 10+ notifications
-if (process.platform === "win32") app.setAppUserModelId(app.getName());
 
 protocol.registerSchemesAsPrivileged([
   { scheme: "app", privileges: { secure: true, standard: true } }
@@ -61,12 +54,9 @@ async function createWindow() {
   Store.initRenderer();
   let store = new Store();
   let config = store.get("config", { userId: uuidv4() }) as object;
-  // @ts-ignore
-  log.transports.remote.client = { "uuid": config.userId, "version": app.getVersion() };
+
   log.info("Application started");
   log.info("Version: " + app.getVersion());
-  // @ts-ignore
-  log.transports.remote.level = false;
 
   win = new BrowserWindow({
     title: "Main window",
@@ -195,33 +185,6 @@ async function StopServer() {
   await stopServer();
   status.isServerRunning = false;
 }
-
-ipcMain.handle(EVENT_CHECK_PORT, async () => {
-  const tcpPortUsed = require("tcp-port-used");
-  const result = await tcpPortUsed.check(443, "127.0.0.1");
-  log.info("443 is in use:", result);
-  return result;
-});
-
-ipcMain.handle(EVENT_CHECK_UPDATE, async () => {
-  autoUpdater.autoDownload = false;
-  autoUpdater.autoInstallOnAppQuit = false;
-  return "Update Check Disabled";
-});
-
-autoUpdater.on("update-downloaded", (event, releaseNotes, releaseName) => {
-  const dialogOpts = {
-    type: "info",
-    buttons: ["Restart", "Later"],
-    title: "Application Update",
-    message: process.platform === "win32" ? releaseNotes : releaseName,
-    detail: "A new version has been downloaded. Restart the application to apply the updates."
-  };
-
-  dialog.showMessageBox(dialogOpts).then((returnValue) => {
-    if (returnValue.response === 0) autoUpdater.quitAndInstall();
-  });
-});
 
 ipcMain.handle(EVENT_COLLECT_LOGS, () => {
   const appLog = (path.dirname(log.transports.file.getFile().path));
