@@ -1,1 +1,1 @@
-mkcert -install -key-file key.pem -cert-file cert.pem kh.ssl.ak.tiles.virtualearth.net khstorelive.azureedge.net *.virtualearth.net *.azureedge.net
+WINEPREFIX=~/.local/share/Steam/steamapps/compatdata/1250410 wine mkcert.exe -install -key-file key.pem -cert-file cert.pem kh.ssl.ak.tiles.virtualearth.net khstorelive.azureedge.net *.virtualearth.net *.azureedge.net
