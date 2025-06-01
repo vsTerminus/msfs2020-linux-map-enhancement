@@ -2,7 +2,7 @@
   <div class="space-y-5 relative h-full">
     <div class="card lg:card-side bg-base-100 shadow-xl">
       <figure>
-        <img src="../../../public/images/msfs-2020-google-map-replacement-E4kAr.webp"
+        <img src="../../../public/images/C-FCAW.png"
              alt="Album"
              class="w-96"
         >
