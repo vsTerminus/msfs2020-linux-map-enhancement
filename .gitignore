@@ -45,3 +45,4 @@ pnpm-debug.log*
 /extra/server/python/
 /extra/server/logs/
 extra/server/config.json
+GLCache
